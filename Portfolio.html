@@ -505,6 +505,31 @@
             -ms-user-select: none;
             user-select: none;
         }
+
+
+        /* Ash particle styling */
+        .ash {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        animation: floatAsh 5s linear infinite;
+        }
+
+        @keyframes floatAsh {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -894,6 +919,22 @@
 
         // Initialize
         connectWebSocket();
+        
+        function createAsh() {
+            const ash = document.createElement('div');
+            ash.className = 'ash';
+            ash.style.left = Math.random() * 100 + 'vw';
+            ash.style.top = '100vh';
+            ash.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            ash.style.opacity = Math.random();
+            document.body.appendChild(ash);
+    
+            setTimeout(() => {
+                ash.remove();
+            }, 5000);
+        }
+
+        setInterval(createAsh, 150);
     </script>
 </body>
 </html>
