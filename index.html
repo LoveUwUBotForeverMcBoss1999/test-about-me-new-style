@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Status</title>
+    <title id="page-title">Loading...</title>
+    <link rel="icon" type="image/png" id="favicon">
+    
+    <!-- Meta tags for preview -->
+    <meta property="og:title" content="Cool Dark Profile">
+    <meta property="og:description" content="Dark themed Discord status page">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0f0f0f">
+    
     <style>
         * {
             margin: 0;
@@ -12,47 +20,73 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 50, 100, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 20, 80, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 80, 120, 0.2) 0%, transparent 50%),
-                linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(5, 10, 25, 0.95)),
-                url('https://images.alphacoders.com/839/thumb-1920-839532.jpg');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.alphacoders.com/839/thumb-1920-839532.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            color: #e0e0e0;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow-x: hidden;
-            animation: subtleShift 20s ease-in-out infinite alternate;
+            position: relative;
         }
 
-        @keyframes subtleShift {
-            0% { filter: hue-rotate(0deg) brightness(0.8) contrast(1.2); }
-            100% { filter: hue-rotate(10deg) brightness(0.7) contrast(1.3); }
+        /* Particle effects */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #3a5998;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .container {
-            background: 
-                linear-gradient(145deg, rgba(5, 10, 20, 0.95), rgba(10, 15, 30, 0.9)),
-                radial-gradient(circle at 30% 30%, rgba(0, 40, 80, 0.1) 0%, transparent 70%);
-            backdrop-filter: blur(25px) saturate(150%);
+            background: rgba(8, 8, 12, 0.95);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(64, 64, 80, 0.3);
             border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 
-                0 25px 80px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(0, 100, 200, 0.2),
-                inset 0 1px 0 rgba(100, 150, 255, 0.1),
-                0 0 50px rgba(0, 50, 150, 0.3);
-            border: 1px solid rgba(0, 100, 200, 0.3);
-            text-align: center;
+            padding: 40px;
             max-width: 500px;
             width: 90%;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.8),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 0 50px rgba(58, 89, 152, 0.1);
+            text-align: center;
             position: relative;
-            animation: containerFloat 6s ease-in-out infinite alternate, slideUp 1s ease-out;
+            animation: slideIn 1s ease-out;
             overflow: hidden;
         }
 
@@ -63,68 +97,57 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: 
-                conic-gradient(from 0deg, transparent, rgba(0, 100, 255, 0.1), transparent),
-                radial-gradient(circle, rgba(0, 150, 255, 0.05) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-            z-index: -1;
+            background: linear-gradient(45deg, transparent, rgba(58, 89, 152, 0.03), transparent);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
         }
 
-        @keyframes containerFloat {
-            0% { transform: translateY(0px) scale(1); box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 50, 150, 0.3); }
-            100% { transform: translateY(-10px) scale(1.02); box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9), 0 0 80px rgba(0, 80, 200, 0.4); }
+        @keyframes scan {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes slideUp {
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(50px) scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .avatar-container {
             position: relative;
             display: inline-block;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
 
         .avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid rgba(0, 150, 255, 0.8);
+            border: 4px solid transparent;
             transition: all 0.4s ease;
-            animation: avatarPulse 3s infinite ease-in-out, freeze 8s ease-in-out infinite alternate;
-            filter: brightness(0.9) contrast(1.1) saturate(0.8);
+            animation: breathe 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(58, 89, 152, 0.3));
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(58, 89, 152, 0.3));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 30px rgba(58, 89, 152, 0.5));
+            }
         }
 
         .avatar:hover {
-            transform: scale(1.15);
-            box-shadow: 
-                0 0 40px rgba(0, 150, 255, 0.6),
-                0 0 80px rgba(0, 100, 200, 0.3),
-                inset 0 0 20px rgba(0, 200, 255, 0.2);
-            border-color: rgba(0, 200, 255, 1);
-            filter: brightness(1.1) contrast(1.2) saturate(1.1);
-        }
-
-        @keyframes avatarPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 100, 200, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 150, 255, 0.6); }
-        }
-
-        @keyframes freeze {
-            0% { filter: brightness(0.9) contrast(1.1) saturate(0.8) hue-rotate(0deg); }
-            100% { filter: brightness(0.7) contrast(1.3) saturate(0.6) hue-rotate(5deg); }
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 40px rgba(58, 89, 152, 0.7));
         }
 
         .status-indicator {
@@ -134,372 +157,727 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            border: 3px solid rgba(20, 20, 30, 0.9);
-            animation: statusPulse 2s infinite;
+            border: 3px solid rgba(8, 8, 12, 0.95);
+            transition: all 0.3s ease;
+            animation: pulse-status 2s infinite;
         }
 
-        @keyframes statusPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes pulse-status {
+            0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+            50% { box-shadow: 0 0 0 8px transparent; }
         }
 
         .status-online { 
-            background: linear-gradient(135deg, #43b581, #2d8a5a);
-            box-shadow: 0 0 15px rgba(67, 181, 129, 0.4);
+            background: #43b581; 
+            box-shadow: 0 0 10px rgba(67, 181, 129, 0.5);
         }
         .status-idle { 
-            background: linear-gradient(135deg, #faa61a, #d4941a);
-            box-shadow: 0 0 15px rgba(250, 166, 26, 0.4);
+            background: #faa61a; 
+            box-shadow: 0 0 10px rgba(250, 166, 26, 0.5);
         }
         .status-dnd { 
-            background: linear-gradient(135deg, #f04747, #d73c3c);
-            box-shadow: 0 0 15px rgba(240, 71, 71, 0.4);
+            background: #f04747; 
+            box-shadow: 0 0 10px rgba(240, 71, 71, 0.5);
         }
         .status-offline { 
-            background: linear-gradient(135deg, #747f8d, #5a6670);
-            box-shadow: 0 0 15px rgba(116, 127, 141, 0.3);
+            background: #747f8d; 
+            box-shadow: 0 0 10px rgba(116, 127, 141, 0.3);
         }
 
         .username {
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: rgba(200, 220, 255, 0.95);
-            margin-bottom: 0.5rem;
-            text-shadow: 
-                0 0 10px rgba(0, 150, 255, 0.5),
-                0 4px 20px rgba(0, 0, 0, 0.8);
-            letter-spacing: 2px;
-            animation: textGlow 4s ease-in-out infinite alternate;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffffff, #a0a0a0, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.5), 0 4px 20px rgba(0, 0, 0, 0.8); }
-            100% { text-shadow: 0 0 20px rgba(0, 200, 255, 0.8), 0 4px 30px rgba(0, 0, 0, 0.9); }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .discriminator {
-            color: rgba(150, 170, 200, 0.7);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .typing-text {
-            font-size: 1rem;
-            color: rgba(100, 180, 255, 0.9);
-            margin-bottom: 1.5rem;
-            min-height: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(100, 180, 255, 0.3);
-            animation: typingGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes typingGlow {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; text-shadow: 0 0 15px rgba(100, 180, 255, 0.5); }
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
         .status-text {
-            font-size: 0.95rem;
-            color: rgba(180, 200, 230, 0.9);
-            margin-bottom: 1rem;
-            padding: 1.2rem;
-            background: 
-                linear-gradient(135deg, rgba(0, 20, 40, 0.6), rgba(0, 30, 60, 0.4)),
-                radial-gradient(circle at 20% 80%, rgba(0, 100, 200, 0.1) 0%, transparent 50%);
-            border-radius: 12px;
-            border-left: 3px solid rgba(0, 150, 255, 0.6);
-            font-style: italic;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            box-shadow: inset 0 0 20px rgba(0, 50, 100, 0.2);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            min-height: 1.5em;
+            color: #ccc;
         }
 
-        .activity-info {
-            background: 
-                linear-gradient(135deg, rgba(0, 30, 80, 0.2), rgba(0, 50, 120, 0.15)),
-                radial-gradient(circle at 70% 30%, rgba(0, 120, 255, 0.1) 0%, transparent 60%);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(0, 120, 255, 0.3);
-            box-shadow: 
-                inset 0 0 30px rgba(0, 80, 150, 0.1),
-                0 5px 25px rgba(0, 0, 0, 0.3);
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid #3a5998;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
         }
 
-        .activity-title {
-            color: rgba(120, 180, 255, 0.9);
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(120, 180, 255, 0.3);
+        @keyframes typing {
+            0%, 90%, 100% { width: 0; }
+            30%, 60% { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #3a5998; }
+        }
+
+        .activity {
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 3px solid #3a5998;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(58, 89, 152, 0.1), transparent);
+            animation: slide 3s infinite;
+        }
+
+        @keyframes slide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .activity.visible {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .activity-name {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
         }
 
         .activity-details {
-            color: rgba(160, 180, 210, 0.8);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            font-weight: 300;
-            letter-spacing: 0.5px;
+            color: #aaa;
+            font-size: 0.9em;
+            position: relative;
+            z-index: 1;
         }
 
-        .loading {
-            color: rgba(100, 180, 255, 0.8);
-            font-size: 1.1rem;
-            animation: loadingPulse 2s infinite, dots 1.5s infinite;
-            font-weight: 300;
-            letter-spacing: 1px;
+        /* Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            background: rgba(8, 8, 12, 0.95);
+            padding: 12px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(64, 64, 80, 0.4);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        @keyframes loadingPulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+        .audio-controls:hover {
+            background: rgba(15, 15, 25, 0.98);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
         }
 
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
+        .control-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            position: relative;
         }
 
-        .loading::after {
-            content: '';
-            animation: dots 1.5s infinite;
+        .control-btn:hover {
+            color: #fff;
+            background: rgba(58, 89, 152, 0.2);
+            transform: scale(1.1);
         }
 
-        .glitch {
-            animation: coldGlitch 0.4s ease-in-out infinite alternate;
+        .control-btn:active {
+            transform: scale(0.95);
         }
 
-        @keyframes coldGlitch {
-            0% { 
-                transform: translateX(0) scale(1);
-                filter: hue-rotate(0deg) brightness(1);
-            }
-            25% { 
-                transform: translateX(-3px) scale(0.98);
-                filter: hue-rotate(5deg) brightness(0.9);
-            }
-            50% { 
-                transform: translateX(3px) scale(1.02);
-                filter: hue-rotate(-5deg) brightness(1.1);
-            }
-            75% { 
-                transform: translateX(-2px) scale(0.99);
-                filter: hue-rotate(3deg) brightness(0.95);
-            }
-            100% { 
-                transform: translateX(0) scale(1);
-                filter: hue-rotate(0deg) brightness(1);
-            }
-        }
-
-
-
-        .error {
+        .control-btn.muted {
             color: #f04747;
-            background: rgba(240, 71, 71, 0.1);
-            border: 1px solid rgba(240, 71, 71, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
+        }
+
+        .volume-container {
+            position: relative;
+            overflow: hidden;
+            margin-left: 8px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+            opacity: 0;
+        }
+
+        .audio-controls:hover .volume-container {
+            width: 100px;
+            opacity: 1;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3a5998, #4a69a8);
+            border-radius: 3px;
+            transition: width 0.2s ease;
+            width: 50%;
+            position: relative;
+        }
+
+        .volume-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: volumeShine 2s infinite;
+        }
+
+        @keyframes volumeShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .volume-thumb {
+            position: absolute;
+            top: 50%;
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            cursor: grab;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .volume-thumb:hover {
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 4px 12px rgba(58, 89, 152, 0.4);
+        }
+
+        .volume-thumb:active {
+            cursor: grabbing;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Burn effects */
+        .burn-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .burn-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #ff6b35, #f7931e, transparent);
+            border-radius: 50%;
+            animation: burn 1.5s ease-out forwards;
+        }
+
+        @keyframes burn {
+            0% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        /* Glitch effects */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.3s infinite;
+            color: #ff0040;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.3s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+        }
+
+        /* Loading spinner */
+        .loading {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Matrix rain effect */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: 0;
+            color: rgba(58, 89, 152, 0.3);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            animation: matrix-fall linear infinite;
+        }
+
+        @keyframes matrix-fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Particle system -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Matrix rain -->
+    <div class="matrix-rain" id="matrixRain"></div>
+
     <div class="container">
         <div class="avatar-container">
-            <img id="avatar" class="avatar" src="" alt="Discord Avatar">
-            <div id="status-indicator" class="status-indicator"></div>
+            <img class="avatar" id="avatar" src="" alt="Avatar">
+            <div class="status-indicator" id="status-indicator"></div>
         </div>
         
-        <div id="username" class="username">Loading...</div>
-        <div id="discriminator" class="discriminator"></div>
+        <div class="username" id="username" data-text="Loading...">Loading...</div>
+        <div class="discriminator" id="discriminator"></div>
+        <div class="status-text" id="status-text">
+            <span class="typing-text" id="typing-status">Connecting to Discord...</span>
+        </div>
         
-        <div id="typing-text" class="typing-text"></div>
-        
-        <div id="status-text" class="status-text" style="display: none;"></div>
-        
-        <div id="activity-info" class="activity-info" style="display: none;">
-            <div id="activity-title" class="activity-title"></div>
-            <div id="activity-details" class="activity-details"></div>
+        <div class="activity" id="activity">
+            <div class="activity-name" id="activity-name"></div>
+            <div class="activity-details" id="activity-details"></div>
         </div>
     </div>
 
-    <video id="bgMusic" autoplay loop muted style="position: fixed; top: -9999px;">
-        <source src="bgmusic.mp4" type="video/mp4">
-    </video>
+    <div class="audio-controls">
+        <button class="control-btn" id="muteBtn" title="Mute/Unmute">
+            <span id="muteIcon">♪</span>
+        </button>
+        <div class="volume-container">
+            <div class="volume-slider" id="volumeSlider">
+                <div class="volume-fill" id="volumeFill">
+                    <div class="volume-thumb" id="volumeThumb"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="bgmusic.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         const DISCORD_ID = '1237079597124812862';
-        let typingIndex = 0;
-        let currentText = '';
-        let isDeleting = false;
-        let userData = null;
-
-        const texts = [
-            "Welcome to my Discord Status",
-            "Powered by Lanyard API",
-            "Live Discord Integration",
-            "Real-time Status Updates"
-        ];
-
-        // Typing animation
-        function typeWriter() {
-            const current = texts[typingIndex];
-            const typingElement = document.getElementById('typing-text');
-            
-            if (isDeleting) {
-                currentText = current.substring(0, currentText.length - 1);
-            } else {
-                currentText = current.substring(0, currentText.length + 1);
+        const LANYARD_WS_URL = 'wss://api.lanyard.rest/socket';
+        
+        let ws;
+        let heartbeatInterval;
+        let volumeDragging = false;
+        
+        // Audio setup
+        const audio = document.getElementById('bgMusic');
+        const muteBtn = document.getElementById('muteBtn');
+        const muteIcon = document.getElementById('muteIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeFill = document.getElementById('volumeFill');
+        const volumeThumb = document.getElementById('volumeThumb');
+        
+        // Initialize audio
+        audio.volume = 0.5;
+        
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
             }
-            
-            typingElement.textContent = currentText;
-            
-            let typeSpeed = isDeleting ? 50 : 100;
-            
-            if (!isDeleting && currentText === current) {
-                typeSpeed = 2000; // Pause at end
-                isDeleting = true;
-            } else if (isDeleting && currentText === '') {
-                isDeleting = false;
-                typingIndex = (typingIndex + 1) % texts.length;
-                typeSpeed = 500;
-            }
-            
-            setTimeout(typeWriter, typeSpeed);
         }
-
-        // Fetch Discord data
-        async function fetchDiscordData() {
-            try {
-                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-                const data = await response.json();
+        
+        // Create matrix rain
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 20; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDelay = Math.random() * 5 + 's';
+                column.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 
-                if (data.success) {
-                    userData = data.data;
-                    updateUI();
-                } else {
-                    showError('Failed to fetch Discord data');
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
                 }
-            } catch (error) {
-                console.error('Error fetching Discord data:', error);
-                showError('Connection error. Retrying...');
-                setTimeout(fetchDiscordData, 5000);
+                column.innerHTML = text;
+                
+                matrixContainer.appendChild(column);
             }
         }
-
-        function updateUI() {
-            if (!userData) return;
-
-            // Update avatar
-            const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${userData.discord_user.avatar}.png?size=256`;
-            document.getElementById('avatar').src = avatarUrl;
-
-            // Update username
-            document.getElementById('username').textContent = userData.discord_user.username;
+        
+        // Burn effect
+        function createBurnEffect(x, y) {
+            const burnContainer = document.createElement('div');
+            burnContainer.className = 'burn-effect';
+            burnContainer.style.left = x + 'px';
+            burnContainer.style.top = y + 'px';
             
-            // Update discriminator if it exists
-            if (userData.discord_user.discriminator && userData.discord_user.discriminator !== '0') {
-                document.getElementById('discriminator').textContent = `#${userData.discord_user.discriminator}`;
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'burn-particle';
+                particle.style.left = (Math.random() - 0.5) * 20 + 'px';
+                particle.style.top = (Math.random() - 0.5) * 20 + 'px';
+                particle.style.animationDelay = Math.random() * 0.5 + 's';
+                burnContainer.appendChild(particle);
             }
-
-            // Update status indicator
-            const statusIndicator = document.getElementById('status-indicator');
-            statusIndicator.className = `status-indicator status-${userData.discord_status}`;
-
-            // Update custom status
-            if (userData.activities && userData.activities.length > 0) {
-                const customStatus = userData.activities.find(activity => activity.type === 4);
-                if (customStatus && customStatus.state) {
-                    const statusElement = document.getElementById('status-text');
-                    statusElement.textContent = customStatus.state;
-                    statusElement.style.display = 'block';
-                }
-
-                // Update other activities
-                const otherActivities = userData.activities.filter(activity => activity.type !== 4);
-                if (otherActivities.length > 0) {
-                    const activity = otherActivities[0];
-                    const activityInfo = document.getElementById('activity-info');
-                    const activityTitle = document.getElementById('activity-title');
-                    const activityDetails = document.getElementById('activity-details');
-
-                    let title = '';
-                    switch (activity.type) {
-                        case 0: title = '🎮 Playing'; break;
-                        case 1: title = '📺 Streaming'; break;
-                        case 2: title = '🎵 Listening to'; break;
-                        case 3: title = '📺 Watching'; break;
-                        case 5: title = '🏆 Competing in'; break;
-                        default: title = '📱 Activity';
-                    }
-
-                    activityTitle.textContent = `${title} ${activity.name}`;
-                    
-                    let details = '';
-                    if (activity.details) details += activity.details;
-                    if (activity.state) details += activity.state ? (details ? '\n' + activity.state : activity.state) : '';
-                    
-                    activityDetails.textContent = details || 'No additional details';
-                    activityInfo.style.display = 'block';
-                }
-            }
-        }
-
-        function showError(message) {
-            const container = document.querySelector('.container');
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error';
-            errorDiv.textContent = message;
-            container.appendChild(errorDiv);
+            
+            document.body.appendChild(burnContainer);
             
             setTimeout(() => {
-                if (errorDiv.parentNode) {
-                    errorDiv.parentNode.removeChild(errorDiv);
-                }
-            }, 5000);
+                document.body.removeChild(burnContainer);
+            }, 2000);
         }
-
-        // Music control
-        function startMusic() {
-            const music = document.getElementById('bgMusic');
-            music.muted = false;
-            music.volume = 0.3;
-            music.play().catch(e => {
-                // If autoplay fails, try again on user interaction
-                document.addEventListener('click', () => {
-                    music.play().catch(e => console.log('Music play failed'));
-                }, { once: true });
-            });
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            typeWriter();
-            fetchDiscordData();
+        
+        // Auto-play audio
+        document.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(console.error);
+            }
+        }, { once: true });
+        
+        // Audio controls
+        muteBtn.addEventListener('click', (e) => {
+            createBurnEffect(e.clientX, e.clientY);
             
-            // Update every 30 seconds
-            setInterval(fetchDiscordData, 30000);
-            
-            // Start background music
-            startMusic();
-            
-            // Add some glitch effects occasionally
-            setInterval(() => {
-                if (Math.random() < 0.1) {
-                    document.querySelector('.container').classList.add('glitch');
-                    setTimeout(() => {
-                        document.querySelector('.container').classList.remove('glitch');
-                    }, 300);
-                }
-            }, 5000);
+            if (audio.muted) {
+                audio.muted = false;
+                muteIcon.textContent = '♪';
+                muteBtn.classList.remove('muted');
+            } else {
+                audio.muted = true;
+                muteIcon.textContent = '✕';
+                muteBtn.classList.add('muted');
+            }
         });
+        
+        // Volume control
+        function updateVolumeDisplay(volume) {
+            const percentage = volume * 100;
+            volumeFill.style.width = percentage + '%';
+        }
+        
+        function setVolume(clientX) {
+            const rect = volumeSlider.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const percentage = Math.max(0, Math.min(1, x / rect.width));
+            audio.volume = percentage;
+            updateVolumeDisplay(percentage);
+        }
+        
+        volumeSlider.addEventListener('mousedown', (e) => {
+            volumeDragging = true;
+            setVolume(e.clientX);
+            createBurnEffect(e.clientX, e.clientY);
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (volumeDragging) {
+                setVolume(e.clientX);
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            volumeDragging = false;
+        });
+        
+        volumeSlider.addEventListener('click', (e) => {
+            setVolume(e.clientX);
+            createBurnEffect(e.clientX, e.clientY);
+        });
+        
+        // Initialize volume
+        updateVolumeDisplay(0.5);
+        
+        function connectLanyard() {
+            ws = new WebSocket(LANYARD_WS_URL);
+            
+            ws.onopen = () => {
+                console.log('Connected to Lanyard');
+                ws.send(JSON.stringify({
+                    op: 2,
+                    d: {
+                        subscribe_to_id: DISCORD_ID
+                    }
+                }));
+            };
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.op === 1) {
+                    heartbeatInterval = setInterval(() => {
+                        ws.send(JSON.stringify({ op: 3 }));
+                    }, data.d.heartbeat_interval);
+                    return;
+                }
+                
+                if (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                    updatePresence(data.d);
+                }
+            };
+            
+            ws.onclose = () => {
+                console.log('Disconnected from Lanyard, reconnecting...');
+                clearInterval(heartbeatInterval);
+                setTimeout(connectLanyard, 3000);
+            };
+            
+            ws.onerror = (error) => {
+                console.error('Lanyard WebSocket error:', error);
+            };
+        }
+        
+        function updatePresence(presence) {
+            const user = presence.discord_user;
+            const status = presence.discord_status;
+            
+            // Update avatar and favicon
+            const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
+            document.getElementById('avatar').src = avatarUrl;
+            document.getElementById('favicon').href = avatarUrl;
+            
+            // Update username with glitch effect
+            const usernameEl = document.getElementById('username');
+            const displayName = user.global_name || user.username;
+            usernameEl.textContent = displayName;
+            usernameEl.setAttribute('data-text', displayName);
+            
+            document.getElementById('discriminator').textContent = user.discriminator !== '0' ? `#${user.discriminator}` : '';
+            
+            // Update page title with typing effect
+            animateTitle(displayName);
+            
+            // Update status indicator
+            const indicator = document.getElementById('status-indicator');
+            indicator.className = `status-indicator status-${status}`;
+            
+            // Update avatar border based on status
+            const avatar = document.getElementById('avatar');
+            const borderColors = {
+                online: '#43b581',
+                idle: '#faa61a',
+                dnd: '#f04747',
+                offline: '#747f8d'
+            };
+            avatar.style.borderColor = borderColors[status];
+            
+            // Update status text
+            const statusTexts = {
+                online: 'In the digital realm...',
+                idle: 'Away from the shadows...',
+                dnd: 'Do not disturb the darkness...',
+                offline: 'Lost in the void...'
+            };
+            
+            animateStatusText(statusTexts[status] || 'Unknown status...');
+            
+            // Update activities
+            updateActivities(presence.activities);
+        }
+        
+        function animateTitle(text) {
+            let index = 0;
+            const titleElement = document.getElementById('page-title');
+            titleElement.textContent = '';
+            
+            const typeInterval = setInterval(() => {
+                titleElement.textContent += text[index];
+                index++;
+                if (index >= text.length) {
+                    clearInterval(typeInterval);
+                }
+            }, 100);
+        }
+        
+        function animateStatusText(text) {
+            const element = document.getElementById('typing-status');
+            element.style.width = '0';
+            element.textContent = text;
+            
+            setTimeout(() => {
+                element.style.animation = 'none';
+                element.offsetHeight;
+                element.style.animation = 'typing 3s steps(' + text.length + ', end), blink-caret 0.75s step-end infinite';
+            }, 100);
+        }
+        
+        function updateActivities(activities) {
+            const activityElement = document.getElementById('activity');
+            
+            const mainActivities = activities.filter(a => a.type !== 2);
+            
+            if (mainActivities.length > 0) {
+                const activity = mainActivities[0];
+                document.getElementById('activity-name').textContent = activity.name;
+                
+                let details = '';
+                if (activity.details) details += activity.details;
+                if (activity.state) details += (details ? ' • ' : '') + activity.state;
+                
+                document.getElementById('activity-details').textContent = details || 'Active';
+                activityElement.classList.add('visible');
+            } else {
+                activityElement.classList.remove('visible');
+            }
+        }
+        
+        // Add glitch effect to username periodically
+        setInterval(() => {
+            const username = document.getElementById('username');
+            username.classList.add('glitch');
+            setTimeout(() => {
+                username.classList.remove('glitch');
+            }, 300);
+        }, 10000);
+        
+        // Random burn effects
+        setInterval(() => {
+            createBurnEffect(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight
+            );
+        }, 8000);
+        
+        // Initialize effects
+        createParticles();
+        createMatrixRain();
+        
+        // Initialize connection
+        connectLanyard();
+        
+        // Try to play audio
+        setTimeout(() => {
+            audio.play().catch(() => {
+                console.log('Audio autoplay blocked, waiting for user interaction');
+            });
+        }, 1000);
     </script>
 </body>
 </html>
