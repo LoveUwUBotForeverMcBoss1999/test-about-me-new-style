@@ -10,16 +10,34 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 20, 20, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(50, 50, 150, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(120, 20, 20, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(50, 50, 150, 0.4) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(0, 0, 0, 0.8) 0%, transparent 50%),
-                linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,20,35,0.9) 50%, rgba(0,0,0,0.95) 100%),
-                url('https://www.mrsmithworldphotography.com/photos/Buckingham-Palace-24.jpg');
+                linear-gradient(135deg, rgba(0,0,0,0.92) 0%, rgba(20,20,35,0.85) 50%, rgba(0,0,0,0.92) 100%),
+                url('https://images.alphacoders.com/839/thumb-1920-839532.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -37,12 +55,13 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(150, 0, 0, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(100, 0, 100, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+                radial-gradient(circle at 10% 20%, rgba(150, 0, 0, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(100, 0, 100, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4) 0%, transparent 70%);
             animation: darkPulse 8s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
+            backdrop-filter: blur(2px);
         }
 
         @keyframes darkPulse {
@@ -77,6 +96,7 @@
                 inset 0 0 20px rgba(0, 0, 0, 0.5);
             animation: darkPulse2 2s infinite;
             position: relative;
+            backdrop-filter: blur(5px);
         }
 
         .avatar::after {
@@ -87,7 +107,7 @@
             right: -8px;
             bottom: -8px;
             border-radius: 50%;
-            background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(50,50,50,0.4), rgba(0,0,0,0.8));
+            background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(70,70,70,0.4), rgba(0,0,0,0.8));
             z-index: -1;
             animation: rotate 10s linear infinite;
         }
@@ -115,7 +135,7 @@
         .username {
             font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #1a1a1a, #333333, #1a1a1a, #000000);
+            background: linear-gradient(45deg, #2a2a2a, #555555, #2a2a2a, #111111);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -133,25 +153,26 @@
             transform: translate(-50%, -50%);
             width: 120%;
             height: 120%;
-            background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, transparent 70%);
             z-index: -1;
             animation: shadowPulse 3s ease-in-out infinite;
         }
 
         @keyframes shadowPulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
         }
 
         .status {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             padding: 8px 16px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
 
         .status-dot {
@@ -171,6 +192,86 @@
             50% { transform: scale(1.2); opacity: 0.8; }
         }
 
+        .social-media-tiles {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-tile {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(150,150,150,0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 200px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            animation: slideInSocial 0.6s ease-out;
+        }
+
+        .social-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(80, 80, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(50, 50, 50, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .social-tile:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(200, 200, 200, 0.5);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.9),
+                0 0 30px rgba(150, 150, 150, 0.2);
+        }
+
+        @keyframes slideInSocial {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+            filter: grayscale(100%) brightness(0.8);
+            transition: filter 0.3s ease;
+        }
+
+        .social-tile:hover .social-icon {
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .social-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-handle {
+            font-size: 0.9rem;
+            color: #B9BBBE;
+        }
+
         .activities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -179,14 +280,14 @@
         }
 
         .activity-tile {
-            background: rgba(0,0,0,0.9);
-            border: 1px solid rgba(100,100,100,0.2);
-            border-radius: 12px;
+            background: rgba(0,0,0,0.85);
+            border: 1px solid rgba(120,120,120,0.25);
+            border-radius: 15px;
             padding: 1.5rem;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideIn 0.5s ease-out;
         }
 
@@ -198,17 +299,17 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(50, 50, 50, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(30, 30, 30, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 0% 0%, rgba(60, 60, 60, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(40, 40, 40, 0.15) 0%, transparent 50%);
             z-index: -1;
         }
 
         .activity-tile:hover {
-            transform: translateY(-5px);
-            border-color: rgba(150, 150, 150, 0.4);
+            transform: translateY(-8px);
+            border-color: rgba(180, 180, 180, 0.4);
             box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.8),
-                0 0 20px rgba(100, 100, 100, 0.1);
+                0 15px 40px rgba(0, 0, 0, 0.8),
+                0 0 25px rgba(120, 120, 120, 0.15);
         }
 
         @keyframes slideIn {
@@ -261,13 +362,13 @@
         }
 
         .game-tile {
-            border-left: 4px solid #444444;
-            box-shadow: inset 0 0 20px rgba(100, 100, 100, 0.1);
+            border-left: 4px solid #555555;
+            box-shadow: inset 0 0 20px rgba(120, 120, 120, 0.1);
         }
 
         .music-tile {
-            border-left: 4px solid #666666;
-            box-shadow: inset 0 0 20px rgba(150, 150, 150, 0.1);
+            border-left: 4px solid #777777;
+            box-shadow: inset 0 0 20px rgba(170, 170, 170, 0.1);
         }
 
         .progress-bar {
@@ -280,7 +381,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #333333, #666666, #333333);
+            background: linear-gradient(90deg, #444444, #777777, #444444);
             border-radius: 3px;
             transition: width 1s ease;
             position: relative;
@@ -325,7 +426,7 @@
             font-size: 0.9rem;
             margin-top: 0.5rem;
             font-weight: bold;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
             padding: 4px 8px;
             border-radius: 6px;
             display: inline-block;
@@ -337,9 +438,10 @@
             font-size: 1.1rem;
             margin-top: 3rem;
             padding: 2rem;
-            background: rgba(0,0,0,0.5);
-            border-radius: 12px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
         }
 
         @media (max-width: 768px) {
@@ -358,6 +460,15 @@
             .avatar {
                 width: 100px;
                 height: 100px;
+            }
+
+            .social-media-tiles {
+                gap: 1rem;
+            }
+
+            .social-tile {
+                width: 150px;
+                padding: 1rem;
             }
         }
 
@@ -384,9 +495,23 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Disable right-click context menu */
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
+    <audio id="background-music" loop autoplay>
+        <source src="bgmusic.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
         <div class="header">
             <img id="avatar" class="avatar" src="" alt="Avatar">
@@ -394,6 +519,38 @@
             <div id="status" class="status">
                 <div id="status-dot" class="status-dot"></div>
                 <span id="status-text">Loading...</span>
+            </div>
+        </div>
+
+        <div class="social-media-tiles">
+            <div class="social-tile" onclick="window.open('https://www.instagram.com/mcboss120/', '_blank')">
+                <div class="social-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="social-name">Instagram</div>
+                <div class="social-handle">@mcboss120</div>
+            </div>
+
+            <div class="social-tile" onclick="window.open('https://www.tiktok.com/@mcboss224', '_blank')">
+                <div class="social-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="social-name">TikTok</div>
+                <div class="social-handle">@mcboss224</div>
+            </div>
+
+            <div class="social-tile" onclick="window.open('https://discordapp.com/users/1237079597124812862', '_blank')">
+                <div class="social-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.191.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="social-name">Discord</div>
+                <div class="social-handle">Profile</div>
             </div>
         </div>
 
@@ -413,6 +570,36 @@
         let heartbeatInterval;
         let currentData = null;
         let progressInterval;
+
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable various keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+                (e.ctrlKey && e.key === 'u') ||
+                (e.ctrlKey && e.key === 's')) {
+                e.preventDefault();
+            }
+        });
+
+        // Auto-play background music
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('background-music');
+            audio.volume = 0.3; // Set volume to 30%
+            
+            // Try to play audio
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('Audio autoplay failed:', error);
+                });
+            }
+        });
 
         function animateTitle(text) {
             let index = 0;
@@ -497,7 +684,7 @@
                     : `https://cdn.discordapp.com/embed/avatars/${currentData.discord_user.discriminator % 5}.png`;
                 avatar.src = avatarUrl;
                 
-                // Set favicon to skull emoji if no avatar
+                // Set favicon to skull if no avatar
                 const favicon = document.querySelector('link[rel="icon"]');
                 if (avatarUrl.includes('embed/avatars')) {
                     favicon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23fff'%3E💀%3C/text%3E%3C/svg%3E";
@@ -592,6 +779,9 @@
                     imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.png`;
                 }
                 imageHtml = `<img src="${imageUrl}" alt="${activity.name}" class="large-image">`;
+            } else {
+                // Use rocket image for activities without logos
+                imageHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="${activity.name}" class="large-image">`;
             }
             
             // Get small icon
@@ -604,6 +794,9 @@
                     iconUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${iconUrl}.png`;
                 }
                 iconHtml = `<img src="${iconUrl}" alt="" class="activity-icon">`;
+            } else {
+                // Use rocket image for activities without icons
+                iconHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="" class="activity-icon">`;
             }
             
             // Calculate playtime for games
@@ -611,7 +804,7 @@
             if (activity.timestamps && activity.timestamps.start && activity.type === 0) {
                 const now = Date.now();
                 const elapsed = now - activity.timestamps.start;
-                playtimeHtml = `<div class="playtime">⏱️ ${formatTime(elapsed)}</div>`;
+                playtimeHtml = `<div class="playtime">Time: ${formatTime(elapsed)}</div>`;
                 
                 // Update playtime in real-time
                 setInterval(() => {
@@ -619,7 +812,7 @@
                     const newElapsed = newNow - activity.timestamps.start;
                     const playtimeElement = tile.querySelector('.playtime');
                     if (playtimeElement) {
-                        playtimeElement.innerHTML = `⏱️ ${formatTime(newElapsed)}`;
+                        playtimeElement.innerHTML = `Time: ${formatTime(newElapsed)}`;
                     }
                 }, 1000);
             }
@@ -668,13 +861,13 @@
             // Build additional info
             let additionalInfo = '';
             if (activity.details) {
-                additionalInfo += `<div class="activity-details">📋 ${activity.details}</div>`;
+                additionalInfo += `<div class="activity-details">Details: ${activity.details}</div>`;
             }
             if (activity.state) {
-                additionalInfo += `<div class="activity-details">🎯 ${activity.state}</div>`;
+                additionalInfo += `<div class="activity-details">State: ${activity.state}</div>`;
             }
             if (activity.party && activity.party.size) {
-                additionalInfo += `<div class="activity-details">🎮 ${activity.party.size[0]} of ${activity.party.size[1]} players</div>`;
+                additionalInfo += `<div class="activity-details">Players: ${activity.party.size[0]} of ${activity.party.size[1]}</div>`;
             }
             
             tile.innerHTML = `
