@@ -610,10 +610,11 @@
             }
         }
         
-        // Create matrix rain
+        // Create matrix rain with English characters and symbols
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            // Using only English letters, numbers, and symbols that won't be translated
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?~`';
             
             for (let i = 0; i < 20; i++) {
                 const column = document.createElement('div');
